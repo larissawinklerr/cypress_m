@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação do Veículo</title>
+    <script>
+        function enviarAvaliacao() {
+            document.getElementById('loading').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                const nome = document.getElementById('nome').value;
+                const comentario = document.getElementById('comentario').value;
+                if (!nome || !comentario) {
+                    alert("Por favor, preencha todos os campos.");
+                    return;
+                }
+                const novaAvaliacao = document.createElement('p');
+                novaAvaliacao.textContent = `${nome}: ${comentario}`;
+                document.getElementById('avaliacoes').appendChild(novaAvaliacao);
+                document.getElementById('nome').value = "";
+                document.getElementById('comentario').value = "";
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Avaliação do Veículo</h1>
+    <form id="avaliacao-form" onsubmit="event.preventDefault(); enviarAvaliacao();">
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
+        <textarea id="comentario" placeholder="Descreva sua experiência com o veículo..." required></textarea>
+        <button id="submit-button" type="submit">Enviar Avaliação</button>
+    </form>
+    <p id="loading" style="display: none;">Enviando avaliação...</p>
+    <h2>Avaliações</h2>
+    <div id="avaliacoes"></div>
+</body>
+</html>
